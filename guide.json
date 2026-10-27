@@ -1,0 +1,108 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "strata",
+    "nameCn": "Strata",
+    "repoName": "strata-deploy-guide",
+    "oneLiner": "在本地跑大模型并暴露兼容 API 的桌面推理应用",
+    "officialRepo": "https://github.com/Niko1221/Strata",
+    "officialDocs": "https://github.com/Niko1221/Strata#install",
+    "stars": "33.8k",
+    "license": "MIT",
+    "highlights": [
+      "本地推理：模型与对话都在本机，不需要账号",
+      "兼容接口：OpenAI / Anthropic API，`strata connect` 给接入命令",
+      "桌面端：聊天、文件、代码预览在同一窗口",
+      "终端：`strata launch` 选模型并监控速度、显存与请求",
+      "硬件：NVIDIA / AMD / Intel Arc / Apple Silicon",
+      "可选 DeepSeek：显存不够时从 SSD 流式读取"
+    ],
+    "mcpSupport": "Strata 本身不是 MCP server；它提供 OpenAI / Anthropic 兼容 API，Agent 通过接口接入。本仓库的 MCP 只提供下载、校验与常见坑。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-27",
+    "verification": [
+      [
+        "Release v0.2.6 的 Windows 安装包已下载，SHA256 与 Release 记录一致（106.7 MB）",
+        "已验证 2026-10-27"
+      ],
+      [
+        "Windows / macOS / Linux 产物与 SHA256 digest 已核对",
+        "已核对 2026-10-27"
+      ],
+      [
+        "未安装运行（首次启动要下载引擎与模型，体积过大）",
+        "已核对 2026-10-27"
+      ],
+      [
+        "MCP 服务握手与工具列表（initialize / tools/list）",
+        "已验证 2026-10-27"
+      ],
+      [
+        "非目标宿主调用被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-27"
+      ]
+    ],
+    "deploy": {
+      "type": "binary",
+      "steps": [
+        "if [ \"$(uname -s)\" = \"Darwin\" ]; then url=https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-macos-arm64.dmg ; want=ef45c9c4cbf212d81a3519738b5ef26ebbe9d728987ec0a6aba738ddb0ba997b ; file=Strata.dmg ; else url=https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-linux-x86_64.AppImage ; want=6b512bfab3261626b0a4d1493fa414f05cad103f5140fe817c63094a4a502858 ; file=Strata.AppImage ; fi",
+        "curl -fL -o \"$file\" \"$url\"",
+        "if command -v sha256sum >/dev/null 2>&1; then echo \"$want  $file\" | sha256sum -c - ; else echo \"$want  $file\" | shasum -a 256 -c - ; fi",
+        "if [ \"$file\" = \"Strata.AppImage\" ]; then chmod +x Strata.AppImage ; echo \"已就绪：./Strata.AppImage；首次启动会下载引擎和模型\" ; else echo \"已下载 Strata.dmg，拖进 Applications 后首次启动会下载引擎和模型\" ; fi"
+      ],
+      "stepsPs": [
+        "curl.exe -L --fail -o Strata-Setup.exe https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-windows-x64-setup.exe",
+        "$h = (Get-FileHash -Algorithm SHA256 Strata-Setup.exe).Hash.ToLower() ; if ($h -ne '90945b97828f3b248e0d31cb1bb7656bce08e9f874eb8034ad0322e3349dce4f') { throw \"SHA256 校验失败，文件可能不完整，请重试\" }",
+        "Start-Process -FilePath .\\Strata-Setup.exe -Wait ; Write-Host '安装完成：首次启动会按显卡下载引擎和模型，请预留足够磁盘'"
+      ],
+      "source": "https://github.com/Niko1221/Strata#install"
+    },
+    "pitfalls": [
+      "没有受支持 GPU：先看硬件表，别硬装",
+      "下载中断：重新启动会续传，预留足够磁盘",
+      "显存不够：换更低量化（Q2/IQ2）或更小模型",
+      "速度很慢：确认用的是 GPU 引擎而不是 CPU 回退",
+      "端口冲突：看 `strata launch` 日志里的实际地址",
+      "客户端连不上：用 `strata connect` 生成对应工具的配置",
+      "macOS Intel 不支持：只有 arm64 dmg"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/strata-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/strata-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "Strata 部署",
+    "Strata 安装教程",
+    "本地运行 Qwen3.8",
+    "本地大模型 API",
+    "OpenAI 兼容 本地",
+    "Anthropic 兼容 本地",
+    "Strata 中文",
+    "离线 AI 助手",
+    "本地 LLM 推理",
+    "strata deploy guide"
+  ],
+  "topics": [
+    "llm",
+    "local-inference",
+    "openai-api",
+    "desktop-app",
+    "apple-silicon",
+    "cuda"
+  ]
+}

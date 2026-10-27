@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "strata-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}
