@@ -1,6 +1,6 @@
 ﻿# Strata 一键部署脚本（第三方指南）——按官方文档封装
 # 官方文档：https://github.com/Niko1221/Strata#install
-# 更新日期：2026-10-27
+# 更新日期：2026-10-28
 # 类型：binary
 $ErrorActionPreference = 'Stop'
 Set-Location -Path $PSScriptRoot
@@ -10,8 +10,8 @@ if (-not (Get-Command curl.exe -ErrorAction SilentlyContinue)) { throw '需要�
 New-Item -ItemType Directory -Force -Path .download | Out-Null
 Set-Location -Path .download
 
-curl.exe -L --fail -o Strata-Setup.exe https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-windows-x64-setup.exe
-$h = (Get-FileHash -Algorithm SHA256 Strata-Setup.exe).Hash.ToLower() ; if ($h -ne '90945b97828f3b248e0d31cb1bb7656bce08e9f874eb8034ad0322e3349dce4f') { throw "SHA256 校验失败，文件可能不完整，请重试" }
+curl.exe -L --fail -o Strata-Setup.exe https://github.com/Niko1221/Strata/releases/download/v0.2.7/Strata-0.2.7-windows-x64-setup.exe
+$h = (Get-FileHash -Algorithm SHA256 Strata-Setup.exe).Hash.ToLower() ; if ($h -ne 'b6b078cfd1939a8375eadf9181952d7c1cb267061a3e3428f35cd3b9d1b60da3') { throw "SHA256 校验失败，文件可能不完整，请重试" }
 Start-Process -FilePath .\Strata-Setup.exe -Wait ; Write-Host '安装完成：首次启动会按显卡下载引擎和模型，请预留足够磁盘'
 
 Write-Host ''

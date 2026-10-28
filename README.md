@@ -1,7 +1,7 @@
 # Strata 一键部署指南
 
 > 第三方部署指南 · 非 Strata 官方仓库。官方项目：[Niko1221/Strata](https://github.com/Niko1221/Strata)
-> 内容来自官方文档（2026-10-27）。项目迭代快，请以[官方文档](https://github.com/Niko1221/Strata#install)为准。
+> 内容来自官方文档（2026-10-28）。项目迭代快，请以[官方文档](https://github.com/Niko1221/Strata#install)为准。
 
 [![⚡ 一键部署](https://img.shields.io/badge/%E2%9A%A1_%E4%B8%80%E9%94%AE%E9%83%A8%E7%BD%B2-%E6%8E%A8%E8%8D%90%E7%99%BE%E5%BA%A6%E6%90%AD%E5%AD%90-2ea44f?style=for-the-badge)](#一键部署推荐用百度搭子)
 
@@ -50,7 +50,7 @@ Strata 是开源的在本地跑大模型并暴露兼容 API 的桌面推理应�
 
 | 优点 | 说明 |
 |---|---|
-| 33.8k stars | 2026-09-24 建，单月新增约 2.9 万 |
+| 35.0k stars | 2026-09-24 建，单月新增约 2.9 万 |
 | 完全本地 | 模型、对话、接口都在自己机器 |
 | 接口兼容 | OpenAI 与 Anthropic 两套 API |
 | 客户端齐全 | Claude Code、Codex、OpenCode 等可直接接 |
@@ -64,12 +64,12 @@ Strata 是开源的在本地跑大模型并暴露兼容 API 的桌面推理应�
 | 项目很新 | 0.2.x，接口与行为会变 |
 | MIT 但模型另有许可 | 模型权重受各自协议约束 |
 
-> 以上基于官方文档与社区反馈整理（2026-10-27），以官方最新文档为准。
+> 以上基于官方文档与社区反馈整理（2026-10-28），以官方最新文档为准。
 
 ## 官方安装方式（可手动执行）
 
 ```bash
-if [ "$(uname -s)" = "Darwin" ]; then url=https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-macos-arm64.dmg ; want=ef45c9c4cbf212d81a3519738b5ef26ebbe9d728987ec0a6aba738ddb0ba997b ; file=Strata.dmg ; else url=https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-linux-x86_64.AppImage ; want=6b512bfab3261626b0a4d1493fa414f05cad103f5140fe817c63094a4a502858 ; file=Strata.AppImage ; fi
+if [ "$(uname -s)" = "Darwin" ]; then url=https://github.com/Niko1221/Strata/releases/download/v0.2.7/Strata-0.2.7-macos-arm64.dmg ; want=aa7c2177c86685fe0793e9cd5677c174f8c5237df0a33b8d7eaf3003259bbbfb ; file=Strata.dmg ; else url=https://github.com/Niko1221/Strata/releases/download/v0.2.7/Strata-0.2.7-linux-x86_64.AppImage ; want=701a0325729bbe75eb24c77aee1e45b8fc2e46a74ef1d25475cfef2a3ef1b281 ; file=Strata.AppImage ; fi
 curl -fL -o "$file" "$url"
 if command -v sha256sum >/dev/null 2>&1; then echo "$want  $file" | sha256sum -c - ; else echo "$want  $file" | shasum -a 256 -c - ; fi
 if [ "$file" = "Strata.AppImage" ]; then chmod +x Strata.AppImage ; echo "已就绪：./Strata.AppImage；首次启动会下载引擎和模型" ; else echo "已下载 Strata.dmg，拖进 Applications 后首次启动会下载引擎和模型" ; fi
@@ -81,8 +81,8 @@ if [ "$file" = "Strata.AppImage" ]; then chmod +x Strata.AppImage ; echo "已就
 
 | 场景 | 状态 |
 |---|---|
-| Release v0.2.6 的 Windows 安装包已下载，SHA256 与 Release 记录一致（106.7 MB） | 已验证 2026-10-27 |
-| Windows / macOS / Linux 产物与 SHA256 digest 已核对 | 已核对 2026-10-27 |
+| Release v0.2.7 的 Windows 安装包 SHA256 digest 已核对（107.3 MB） | 已核对 2026-10-28 |
+| Windows / macOS / Linux 产物与 SHA256 digest 已核对 | 已核对 2026-10-28 |
 | 未安装运行（首次启动要下载引擎与模型，体积过大） | 已核对 2026-10-27 |
 | MCP 服务握手与工具列表（initialize / tools/list） | 已验证 2026-10-27 |
 | 非目标宿主调用被拦截（HOST_NOT_ALLOWED） | 已验证 2026-10-27 |
@@ -93,7 +93,7 @@ if [ "$file" = "Strata.AppImage" ]; then chmod +x Strata.AppImage ; echo "已就
 
 Strata 本身不是 MCP server；它提供 OpenAI / Anthropic 兼容 API，Agent 通过接口接入。本仓库的 MCP 只提供下载、校验与常见坑。
 
-本仓库自带一个零依赖的 MCP server（`mcp-server.mjs`），读取同目录的 `guide.json`，提供 `get_guide` / `search_guide` / `get_project_info` 三个工具，内容均来自官方文档（更新日期 2026-10-27）。
+本仓库自带一个零依赖的 MCP server（`mcp-server.mjs`），读取同目录的 `guide.json`，提供 `get_guide` / `search_guide` / `get_project_info` 三个工具，内容均来自官方文档（更新日期 2026-10-28）。
 
 **在百度搭子里接入**：客户端不扫描仓库里的配置文件，需要由百度搭子通过工作区的 MCP 注册接口注册，并且必须使用**绝对路径**（运行时的工作目录是会话目录，不是仓库目录）：
 
@@ -156,5 +156,5 @@ strata connect     # 查看 Claude Code / Codex / OpenCode 等接入命令
 ## 免责声明
 
 本仓库为第三方指南，与 Strata 官方无隶属关系，不代表官方立场。
-教程基于官方文档编写（更新日期：2026-10-27），项目迭代快，请以[官方文档](https://github.com/Niko1221/Strata#install)为准。
+教程基于官方文档编写（更新日期：2026-10-28），项目迭代快，请以[官方文档](https://github.com/Niko1221/Strata#install)为准。
 因使用本教程产生的部署问题，请先在官方仓库的 issue 中检索。

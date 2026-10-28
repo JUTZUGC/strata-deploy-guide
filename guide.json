@@ -8,7 +8,7 @@
     "oneLiner": "在本地跑大模型并暴露兼容 API 的桌面推理应用",
     "officialRepo": "https://github.com/Niko1221/Strata",
     "officialDocs": "https://github.com/Niko1221/Strata#install",
-    "stars": "33.8k",
+    "stars": "35.0k",
     "license": "MIT",
     "highlights": [
       "本地推理：模型与对话都在本机，不需要账号",
@@ -21,15 +21,15 @@
     "mcpSupport": "Strata 本身不是 MCP server；它提供 OpenAI / Anthropic 兼容 API，Agent 通过接口接入。本仓库的 MCP 只提供下载、校验与常见坑。",
     "webuiUrl": "",
     "adapterPorts": "",
-    "collectedAt": "2026-10-27",
+    "collectedAt": "2026-10-28",
     "verification": [
       [
-        "Release v0.2.6 的 Windows 安装包已下载，SHA256 与 Release 记录一致（106.7 MB）",
-        "已验证 2026-10-27"
+        "Release v0.2.7 的 Windows 安装包 SHA256 digest 已核对（107.3 MB）",
+        "已核对 2026-10-28"
       ],
       [
         "Windows / macOS / Linux 产物与 SHA256 digest 已核对",
-        "已核对 2026-10-27"
+        "已核对 2026-10-28"
       ],
       [
         "未安装运行（首次启动要下载引擎与模型，体积过大）",
@@ -47,14 +47,14 @@
     "deploy": {
       "type": "binary",
       "steps": [
-        "if [ \"$(uname -s)\" = \"Darwin\" ]; then url=https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-macos-arm64.dmg ; want=ef45c9c4cbf212d81a3519738b5ef26ebbe9d728987ec0a6aba738ddb0ba997b ; file=Strata.dmg ; else url=https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-linux-x86_64.AppImage ; want=6b512bfab3261626b0a4d1493fa414f05cad103f5140fe817c63094a4a502858 ; file=Strata.AppImage ; fi",
+        "if [ \"$(uname -s)\" = \"Darwin\" ]; then url=https://github.com/Niko1221/Strata/releases/download/v0.2.7/Strata-0.2.7-macos-arm64.dmg ; want=aa7c2177c86685fe0793e9cd5677c174f8c5237df0a33b8d7eaf3003259bbbfb ; file=Strata.dmg ; else url=https://github.com/Niko1221/Strata/releases/download/v0.2.7/Strata-0.2.7-linux-x86_64.AppImage ; want=701a0325729bbe75eb24c77aee1e45b8fc2e46a74ef1d25475cfef2a3ef1b281 ; file=Strata.AppImage ; fi",
         "curl -fL -o \"$file\" \"$url\"",
         "if command -v sha256sum >/dev/null 2>&1; then echo \"$want  $file\" | sha256sum -c - ; else echo \"$want  $file\" | shasum -a 256 -c - ; fi",
         "if [ \"$file\" = \"Strata.AppImage\" ]; then chmod +x Strata.AppImage ; echo \"已就绪：./Strata.AppImage；首次启动会下载引擎和模型\" ; else echo \"已下载 Strata.dmg，拖进 Applications 后首次启动会下载引擎和模型\" ; fi"
       ],
       "stepsPs": [
-        "curl.exe -L --fail -o Strata-Setup.exe https://github.com/Niko1221/Strata/releases/download/v0.2.6/Strata-0.2.6-windows-x64-setup.exe",
-        "$h = (Get-FileHash -Algorithm SHA256 Strata-Setup.exe).Hash.ToLower() ; if ($h -ne '90945b97828f3b248e0d31cb1bb7656bce08e9f874eb8034ad0322e3349dce4f') { throw \"SHA256 校验失败，文件可能不完整，请重试\" }",
+        "curl.exe -L --fail -o Strata-Setup.exe https://github.com/Niko1221/Strata/releases/download/v0.2.7/Strata-0.2.7-windows-x64-setup.exe",
+        "$h = (Get-FileHash -Algorithm SHA256 Strata-Setup.exe).Hash.ToLower() ; if ($h -ne 'b6b078cfd1939a8375eadf9181952d7c1cb267061a3e3428f35cd3b9d1b60da3') { throw \"SHA256 校验失败，文件可能不完整，请重试\" }",
         "Start-Process -FilePath .\\Strata-Setup.exe -Wait ; Write-Host '安装完成：首次启动会按显卡下载引擎和模型，请预留足够磁盘'"
       ],
       "source": "https://github.com/Niko1221/Strata#install"
